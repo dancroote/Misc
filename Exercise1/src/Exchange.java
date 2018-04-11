@@ -10,7 +10,7 @@ public class Exchange {
 		}
 		
 		public String getId() {
-			return "ID: " + Arrays.toString(this.location);
+			return "ID: " +Arrays.toString(this.location);
 		}
 		
 		public int[] getLocation() {
