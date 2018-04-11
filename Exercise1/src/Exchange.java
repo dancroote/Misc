@@ -1,33 +1,25 @@
+import java.util.Arrays;
 
 public class Exchange {
 	
-		int id;
-		int locationX;
-		int locationY;
+		int[] location;
 		
-		public Exchange(int id, int locationX, int locationY) {
+		public Exchange(int[] location) {
 			
-			this.id = id;
-			this.locationX = locationX;
-			this.locationY = locationY;
+			this.location = location;
 		}
 		
-		public int getIdNo() {
-			return this.id;
-		}
-
-		public int getLocationX() {
-			return this.locationX;
+		public String getId() {
+			return "ID: " + Arrays.toString(this.location);
 		}
 		
-		public int getLocationY() {
-			return this.locationY;
+		public int[] getLocation() {
+			return this.location;
 		}
 		
 		public int getDistance() {
 			
-			int distance = this.locationX + this.locationY;
+			int distance = this.location[0] + this.location[1];
 			return distance;
 		}
-		
 }

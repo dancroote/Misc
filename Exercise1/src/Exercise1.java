@@ -10,39 +10,38 @@ public class Exercise1 {
 		
 		//Populate Object list with Exchanges.
 		for(int i=0;i<exchangeLocations.length; i++) {
-		CreateExchange(exchangeArray,exchangeLocations[i][0],exchangeLocations[i][1]);
+		CreateExchange(exchangeArray,exchangeLocations[i]);
 		}
 		
 		//Perform logic and print ID of closest Exchange.
-		int output = ShortestExchangeId(exchangeArray);
+		String output = ShortestExchangeId(exchangeArray);
 		System.out.println("ID of closest exchange is: " + output); 
 	}
 	
 	//Returns ID of closest exchange from list of Exchanges.
-	public static int ShortestExchangeId(ArrayList<Object> exchangeArray) {
+	public static String ShortestExchangeId(ArrayList<Object> exchangeArray) {
 		
-		int shortestExchangeId = 0;
+		String shortestExchangeId = "";
 		int[] locationArray = new int[exchangeArray.size()];
 		int distance = locationArray[0];
 		int minDistance = locationArray[0];
 		
 		//Create array of distances of Exchanges, find smallest distance in array and return ID of that Exchange.
 		for(int i=0;i<exchangeArray.size();i++ ) {
-			locationArray[i] = ((Exchange) exchangeArray.get(i)).getDistance();
+				shortestExchangeId = (((Exchange) exchangeArray.get(0)).getId());
+				locationArray[i] = ((Exchange) exchangeArray.get(i)).getDistance();
 	            distance = locationArray[i];
-	            minDistance = locationArray[0];
 	            if(distance < minDistance) {
 	            	minDistance = locationArray[i];
-	            	shortestExchangeId = (((Exchange) exchangeArray.get(i)).getIdNo());
+	            	shortestExchangeId = (((Exchange) exchangeArray.get(i)).getId());
 	            }
 			}
 				return shortestExchangeId;
 	}
 	
 	//Instantiates new Exchange Object and stores in Object list.
-	public static void CreateExchange(ArrayList<Object> exchangeArray, int xLocation, int yLocation) {
-		int newExchangeId = exchangeArray.size();
-		Exchange newExchange = new Exchange(newExchangeId, xLocation, yLocation);
+	public static void CreateExchange(ArrayList<Object> exchangeArray, int[] location) {
+		Exchange newExchange = new Exchange(location);
 		exchangeArray.add(newExchange);
 	}
 }
