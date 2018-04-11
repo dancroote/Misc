@@ -15,7 +15,7 @@ public class Exercise1 {
 		
 		//Perform logic and print ID of closest Exchange.
 		String output = ShortestExchangeId(exchangeArray);
-		System.out.println("ID of closest exchange is: " + output); 
+		System.out.println("The closest exchange is: " + output); 
 	}
 	
 	//Returns ID of closest exchange from list of Exchanges.
