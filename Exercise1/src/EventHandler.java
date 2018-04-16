@@ -41,7 +41,7 @@ public class EventHandler implements ActionListener {
 					GUI.outputField.setText("");
 					GUI.RestartGUI(x, y);
 				} else {
-					JOptionPane.showMessageDialog(null, "Please enter positive values up to " + maxGridSize);
+					JOptionPane.showMessageDialog(null, "Please enter positive values up to " + maxGridSize + ".");
 					textfieldX.setText("");
 					textfieldY.setText("");
 				}
@@ -50,17 +50,19 @@ public class EventHandler implements ActionListener {
 					textfieldX.setText("");
 					textfieldY.setText("");
 				}
-			} 
-			
-			else if (buttonSelected.getClientProperty("exchanges") == null) {
+			} 			
+			else if (buttonSelected.getClientProperty("exchanges") == null && GUI.exchangeArray.size() < 10) {
 			buttonSelected.setBackground(Color.GREEN);
 			buttonSelected.setText("E: " + buttonSelected.getText());
 			buttonSelected.putClientProperty("exchanges", new Exchange(location));
 			GUI.exchangeArray.add(new Exchange(location));
-			//System.out.println(Arrays.toString(location));
 			((Exchange) GUI.exchangeArray.get(0)).ShortestExchangeId();
-			GUI.performLogic();
+			
+			if(GUI.exchangeArray.size() > 1) {
+				GUI.performLogic();
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "The maximum number of exchanges is 10.");
 			}
 		}
-		
 	}

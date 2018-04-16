@@ -35,7 +35,12 @@ public class MouseHandler implements MouseListener {
 				}				
 			}
 		}
-		GUI.performLogic();
+		if(GUI.exchangeArray.size() > 1) {
+			GUI.performLogic();
+			}
+		if(GUI.exchangeArray.size() == 1) {
+			GUI.outputField.setText("");			
+			}
 	}
 
 	@Override
@@ -65,8 +70,9 @@ public class MouseHandler implements MouseListener {
 			buttonSelected.setBackground(Color.GREEN);
 			buttonSelected.setText( "E: "+ (xCoord) +","+ (yCoord) );
 		}
-		
-		GUI.performLogic();
+		if(GUI.exchangeArray.size() > 1) {
+			GUI.performLogic();
+			}
 		if(GUI.exchangeArray.size() == 0) {
 			GUI.outputField.setText("");
 		}
@@ -85,7 +91,9 @@ public class MouseHandler implements MouseListener {
 			buttonSelected.setBackground(Color.GREEN);
 			buttonSelected.setText( "E: "+ (xCoord) +","+ (yCoord) );
 		}
-		GUI.performLogic();
+		if(GUI.exchangeArray.size() > 1) {
+			GUI.performLogic();
+			}
 		if(GUI.exchangeArray.size() == 0) {
 			GUI.outputField.setText("");
 		}
@@ -117,7 +125,12 @@ public class MouseHandler implements MouseListener {
 				}
 			}
 		} catch(Exception NullPointerException) {}
-		GUI.performLogic();
+		
+		if(GUI.exchangeArray.size() > 1) {
+			GUI.performLogic();
+			}
+		if(GUI.exchangeArray.size() == 1) {
+			GUI.outputField.setText("");			
+		}
 	}
-
 }
