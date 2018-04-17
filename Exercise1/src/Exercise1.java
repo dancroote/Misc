@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Exercise1 {
 
-	static int gridLength = 10;
+	static int gridLength = 20;
 	
 	public static void main(String args[]) {
 		

@@ -62,7 +62,11 @@ public class EventHandler implements ActionListener {
 				GUI.performLogic();
 				}
 			} else {
-				JOptionPane.showMessageDialog(null, "The maximum number of exchanges is 10.");
+				if(buttonSelected.getClientProperty("exchanges") != null) {
+					JOptionPane.showMessageDialog(null, "An Exchange already exists at this location.");
+				} else {
+					JOptionPane.showMessageDialog(null, "The maximum number of exchanges is 10.");
+				}
 			}
 		}
 	}

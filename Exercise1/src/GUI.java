@@ -38,6 +38,11 @@ public class GUI extends JPanel {
 	    Font font = new Font("Verdana",Font.BOLD,12);
 		int gridMaxX = gridLengthX;
 		int gridMaxY = gridLengthY;
+		// Grid size of 0 validation
+		if(gridLengthX == 0 || gridLengthY == 0) {
+			gridMaxX++;
+			gridMaxY++;
+		}
 		String xText = "", yText = "";
 		String xLabel = "xLabel", yLabel = "yLabel";
 		JTextField inputX = new JTextField(xText);
