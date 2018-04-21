@@ -1,22 +1,21 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Menu;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JWindow;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
 
 public class ChessGUI {
+	
+	//Create chess board grid
+	static JPanel [][] boardSquares = new JPanel[8][8];
+	static ArrayList<Object>[][] pieceArray;
 	
 	public ChessGUI() {
 		
@@ -44,11 +43,8 @@ public class ChessGUI {
         
         //Menu Items
         JMenuItem testMenuItem = new JMenuItem("A text-only menu item");
-        
-        
-        //Create chess board grid
-		JPanel [][] boardSquares = new JPanel[8][8];
 		
+        //Draw the chess board
         for (int i=0 ; i< 8 ; i++) {
         	for (int j=0 ; j< 8 ; j++) {
         		boardSquares[i][j] = new JPanel();
@@ -59,6 +55,13 @@ public class ChessGUI {
         		if ((i%2 == 0 && j%2 == 1) || (i%2 == 1 && j%2 == 0)) {
             		boardSquares[i][j].setBackground(Color.DARK_GRAY);       			
         		}        		
+        	}
+        }
+
+        //Add pieces to the chess board
+        for (int i=0 ; i< 8 ; i++) {
+        	for (int j=0 ; j< 8 ; j++) {
+        	//	boardSquares[i][j].add(testMenuItem, new Pieces.Pawn());
         	}
         }
         
@@ -73,6 +76,26 @@ public class ChessGUI {
         //Main window general operations
         mainWindow.setLocationRelativeTo(null);       
         mainWindow.setVisible(true);       
-        mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);        
+        mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+        
+        System.out.println(boardSquares[0][0].getComponent(0));
 	}
+	
+	static void RefreshBoard() {
+		
+		for (int i=0 ; i< 8 ; i++) {
+        	for (int j=0 ; j< 8 ; j++) {
+        		
+        		if (boardSquares[i][j].getClientProperty("Piece") != null) {
+        			boardSquares[i][j].getComponent(0);
+        		}
+        		
+        	}
+		}
+	}
+	
+	static void DrawPiece(JPanel panelSelected) {
+		
+	}
+	
 }

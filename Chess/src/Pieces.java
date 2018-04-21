@@ -6,10 +6,11 @@ public class Pieces {
 	int pieceID;
 	boolean isWhitePiece;
 	
-	class Pawn extends Pieces {
+	static class Pawn extends Pieces {
 		
-		public Pawn() {
+		public Pawn(boolean isWhitePiece) {
 			this.pieceType = "Pawn";
+			this.isWhitePiece = isWhitePiece;
 			
 			if (isWhitePiece == true) {
 				this.pieceSymbol = "\u2659"; //white pawn
@@ -19,10 +20,11 @@ public class Pieces {
 		}
 	}
 
-	class King extends Pieces {
+	static class King extends Pieces {
 		
-		public King() {
+		public King(boolean isWhitePiece) {
 			this.pieceType = "King";
+			this.isWhitePiece = isWhitePiece;
 			
 			if (isWhitePiece == true) {
 				this.pieceSymbol = "\u2654"; //white king
@@ -32,10 +34,11 @@ public class Pieces {
 		}
 	}
 
-	class Queen extends Pieces {
+	static class Queen extends Pieces {
 		
 		public Queen(boolean isWhitePiece) {
-			this.pieceType = "Queen";	
+			this.pieceType = "Queen";
+			this.isWhitePiece = isWhitePiece;
 			
 			if (isWhitePiece == true) {
 				this.pieceSymbol = "\u2655"; //white queen
@@ -45,10 +48,11 @@ public class Pieces {
 		}		
 	}
 
-	class Bishop extends Pieces {
+	static class Bishop extends Pieces {
 		
 		public Bishop(boolean isWhitePiece) {
-			this.pieceType = "Bishop";	
+			this.pieceType = "Bishop";
+			this.isWhitePiece = isWhitePiece;
 			
 			if (isWhitePiece == true) {
 				this.pieceSymbol = "\u2657"; //white bishop
@@ -58,10 +62,11 @@ public class Pieces {
 		}
 	}
 
-	class Knight extends Pieces {
+	static class Knight extends Pieces {
 		
 		public Knight(boolean isWhitePiece) {
-			this.pieceType = "Knight";	
+			this.pieceType = "Knight";
+			this.isWhitePiece = isWhitePiece;
 			
 			if (isWhitePiece == true) {
 				this.pieceSymbol = "\u2658"; //white bishop
@@ -71,10 +76,11 @@ public class Pieces {
 		}
 	}
 
-	class Rook extends Pieces {
+	static class Rook extends Pieces {
 		
 		public Rook(boolean isWhitePiece) {
-			this.pieceType = "Rook";	
+			this.pieceType = "Rook";
+			this.isWhitePiece = isWhitePiece;
 			
 			if (isWhitePiece == true) {
 				this.pieceSymbol = "\u2656"; //white rook
