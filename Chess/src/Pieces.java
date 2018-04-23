@@ -1,3 +1,7 @@
+import java.awt.Color;
+
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 
 public class Pieces {
 	
@@ -5,28 +9,32 @@ public class Pieces {
 	String pieceSymbol;
 	int pieceID;
 	boolean isWhitePiece;
+	boolean isSelected;
+	BoardSquare boardSquareLocatedOn;
 	
 	static class Pawn extends Pieces {
 		
-		public Pawn(boolean isWhitePiece) {
+		public Pawn(boolean isWhitePiece, BoardSquare boardSquareLocatedOn) {
 			this.pieceType = "Pawn";
 			this.isWhitePiece = isWhitePiece;
+			this.boardSquareLocatedOn= boardSquareLocatedOn;
 			
-			if (isWhitePiece == true) {
+			if (isWhitePiece) {
 				this.pieceSymbol = "\u2659"; //white pawn
 			} else {
 				this.pieceSymbol = "\u265F"; //black pawn
-			}			
+			}
 		}
 	}
 
 	static class King extends Pieces {
 		
-		public King(boolean isWhitePiece) {
+		public King(boolean isWhitePiece, BoardSquare boardSquareLocatedOn) {
 			this.pieceType = "King";
 			this.isWhitePiece = isWhitePiece;
+			this.boardSquareLocatedOn= boardSquareLocatedOn;
 			
-			if (isWhitePiece == true) {
+			if (isWhitePiece) {
 				this.pieceSymbol = "\u2654"; //white king
 			} else {
 				this.pieceSymbol = "\u265A"; //black king
@@ -36,11 +44,12 @@ public class Pieces {
 
 	static class Queen extends Pieces {
 		
-		public Queen(boolean isWhitePiece) {
+		public Queen(boolean isWhitePiece, BoardSquare boardSquareLocatedOn) {
 			this.pieceType = "Queen";
 			this.isWhitePiece = isWhitePiece;
+			this.boardSquareLocatedOn= boardSquareLocatedOn;
 			
-			if (isWhitePiece == true) {
+			if (isWhitePiece) {
 				this.pieceSymbol = "\u2655"; //white queen
 			} else {
 				this.pieceSymbol = "\u265B"; //black queen
@@ -50,11 +59,12 @@ public class Pieces {
 
 	static class Bishop extends Pieces {
 		
-		public Bishop(boolean isWhitePiece) {
+		public Bishop(boolean isWhitePiece, BoardSquare boardSquareLocatedOn) {
 			this.pieceType = "Bishop";
 			this.isWhitePiece = isWhitePiece;
+			this.boardSquareLocatedOn= boardSquareLocatedOn;
 			
-			if (isWhitePiece == true) {
+			if (isWhitePiece) {
 				this.pieceSymbol = "\u2657"; //white bishop
 			} else {
 				this.pieceSymbol = "\u265D"; //black bishop
@@ -64,11 +74,12 @@ public class Pieces {
 
 	static class Knight extends Pieces {
 		
-		public Knight(boolean isWhitePiece) {
+		public Knight(boolean isWhitePiece, BoardSquare boardSquareLocatedOn) {
 			this.pieceType = "Knight";
 			this.isWhitePiece = isWhitePiece;
+			this.boardSquareLocatedOn= boardSquareLocatedOn;
 			
-			if (isWhitePiece == true) {
+			if (isWhitePiece) {
 				this.pieceSymbol = "\u2658"; //white bishop
 			} else {
 				this.pieceSymbol = "\u265E"; //black bishop
@@ -78,15 +89,211 @@ public class Pieces {
 
 	static class Rook extends Pieces {
 		
-		public Rook(boolean isWhitePiece) {
+		public Rook(boolean isWhitePiece, BoardSquare boardSquareLocatedOn) {
 			this.pieceType = "Rook";
 			this.isWhitePiece = isWhitePiece;
+			this.boardSquareLocatedOn= boardSquareLocatedOn;
 			
-			if (isWhitePiece == true) {
+			if (isWhitePiece) {
 				this.pieceSymbol = "\u2656"; //white rook
 			} else {
 				this.pieceSymbol = "\u265C"; //black rook
 			}			
 		}
+	}
+	
+	public String getPieceType() {
+		return this.pieceType;
+	}
+	
+	public String getPieceSymbol() {
+		return this.pieceSymbol;
+	}
+	
+	public boolean getIsWhitePiece() {
+		return this.isWhitePiece;
+	}
+	
+	public void setIsSelected(boolean isSelected) {
+		this.isSelected = isSelected;
+	}
+	
+	public boolean getIsSelected() {
+		return this.isSelected;
+	}
+	
+	public BoardSquare getBoardSquareLocatedOn() {
+		return this.boardSquareLocatedOn;
+	}
+	
+	public void setBoardSquareLocatedOn(BoardSquare boardSquareLocatedOn) {
+		this.boardSquareLocatedOn = boardSquareLocatedOn;
+	}
+	
+	public void setHighlights(boolean areVisible) {
+		
+		//set highlights on or off
+		Border HighlightBorder;
+		if (areVisible) {
+			HighlightBorder = ChessGUI.movementHighlightedBorder;
+		} else {
+			HighlightBorder = null; }
+		
+		//directional modifier
+		int direction;
+			if (!isWhitePiece) {
+				direction = -1;
+			} else { direction = 1; }
+
+			int x = boardSquareLocatedOn.locationX;
+			int y = boardSquareLocatedOn.locationY;
+		
+		if (isSelected && pieceType == "Pawn") {
+			//Three squares ahead
+			highlightPainter(x+direction, y, HighlightBorder);
+			highlightPainter(x+direction, y+direction, HighlightBorder);
+			highlightPainter(x+direction, y-direction, HighlightBorder);
+		}
+		
+		if (isSelected && pieceType == "Knight") {
+			//Two farthest squares ahead
+			highlightPainter(x+2*direction, y+direction, HighlightBorder);
+			highlightPainter(x+2*direction, y-direction, HighlightBorder);
+			//Two second farther squares ahead
+			highlightPainter(x+direction, y+2*direction, HighlightBorder);
+			highlightPainter(x+direction, y-2*direction, HighlightBorder);
+			//Two second farther squares behind
+			highlightPainter(x-direction, y+2*direction, HighlightBorder);
+			highlightPainter(x-direction, y-2*direction, HighlightBorder);
+			//Two farthest squares behind
+			highlightPainter(x-2*direction, y+direction, HighlightBorder);
+			highlightPainter(x-2*direction, y-direction, HighlightBorder);
+		}
+		
+		if (isSelected && pieceType == "King") {
+			
+			//All squares surrounding
+			for (int i=-1;i<2;i++) {
+				for(int j=-1;j<2;j++) {
+					if (i==0 & j==0) {} else {
+						highlightPainter(x+i, y+j, HighlightBorder);
+					}
+				}
+			}
+		}
+		
+		if (isSelected && pieceType == "Rook") {
+			//
+			try {
+				for (int i=1; i<7; i++) {
+					if (ChessGUI.boardSquares[x][y-i].getClientProperty("Piece") == null) {
+						highlightPainter(x, y-i, HighlightBorder);
+					} else { break; }
+				}
+			} catch (ArrayIndexOutOfBoundsException e) {}
+			
+			try {
+				for (int i=1; i<7; i++) {
+					if (ChessGUI.boardSquares[x][y+i].getClientProperty("Piece") == null) {
+						highlightPainter(x, y+i, HighlightBorder);
+					} else { break; }
+				}
+			} catch (ArrayIndexOutOfBoundsException e) {}
+			
+			try {
+				for (int i=1; i<7; i++) {
+					if (ChessGUI.boardSquares[x+i][y].getClientProperty("Piece") == null) {
+						highlightPainter(x+i, y, HighlightBorder);
+					} else { break; }
+				}
+			} catch (ArrayIndexOutOfBoundsException e) {}
+			
+			try {
+				for (int i=1; i<7; i++) {
+					if (ChessGUI.boardSquares[x-i][y].getClientProperty("Piece") == null) {
+						highlightPainter(x-i, y, HighlightBorder);
+					} else { break; }
+				}
+			} catch (ArrayIndexOutOfBoundsException e) {}
+		}
+				
+		if (isSelected && pieceType == "Bishop") {
+			//
+			try {
+				for (int i=1; i<7; i++) {
+					if (ChessGUI.boardSquares[x-i][y-i].getClientProperty("Piece") == null) {
+						highlightPainter(x-i, y-i, HighlightBorder);
+					} else { break; }
+				}
+			} catch (ArrayIndexOutOfBoundsException e) {}
+			
+			try {
+				for (int i=1; i<7; i++) {
+					if (ChessGUI.boardSquares[x+i][y+i].getClientProperty("Piece") == null) {
+						highlightPainter(x+i, y+i, HighlightBorder);
+					} else { break; }
+				}
+			} catch (ArrayIndexOutOfBoundsException e) {}
+			
+			try {
+				for (int i=1; i<7; i++) {
+					if (ChessGUI.boardSquares[x+i][y-i].getClientProperty("Piece") == null) {
+						highlightPainter(x+i, y-i, HighlightBorder);
+					} else { break; }
+				}
+			} catch (ArrayIndexOutOfBoundsException e) {}
+			
+			try {
+				for (int i=1; i<7; i++) {
+					if (ChessGUI.boardSquares[x-i][y+i].getClientProperty("Piece") == null) {
+						highlightPainter(x-i, y+i, HighlightBorder);
+					} else { break; }
+				}
+			} catch (ArrayIndexOutOfBoundsException e) {}
+		}
+		
+		if (isSelected && pieceType == "Queen") {
+			//
+			try {
+				for (int i=1; i<7; i++) {
+					if (ChessGUI.boardSquares[x-i][y-i].getClientProperty("Piece") == null) {
+						highlightPainter(x-i, y-i, HighlightBorder);
+					} else { break; }
+				}
+			} catch (ArrayIndexOutOfBoundsException e) {}
+			
+			try {
+				for (int i=1; i<7; i++) {
+					if (ChessGUI.boardSquares[x+i][y+i].getClientProperty("Piece") == null) {
+						highlightPainter(x+i, y+i, HighlightBorder);
+					} else { break; }
+				}
+			} catch (ArrayIndexOutOfBoundsException e) {}
+			
+			try {
+				for (int i=1; i<7; i++) {
+					if (ChessGUI.boardSquares[x+i][y-i].getClientProperty("Piece") == null) {
+						highlightPainter(x+i, y-i, HighlightBorder);
+					} else { break; }
+				}
+			} catch (ArrayIndexOutOfBoundsException e) {}
+			
+			try {
+				for (int i=1; i<7; i++) {
+					if (ChessGUI.boardSquares[x-i][y+i].getClientProperty("Piece") == null) {
+						highlightPainter(x-i, y+i, HighlightBorder);
+					} else { break; }
+				}
+			} catch (ArrayIndexOutOfBoundsException e) {}
+		}
+	}
+	
+	public void highlightPainter(int x, int y, Border HighlightBorder) {		
+		try { ChessGUI.boardSquares[x][y].setBorder(HighlightBorder); 
+		} catch (ArrayIndexOutOfBoundsException e) {}		
+	}
+	
+	public void hasPieceAt(int x, int y) {
+		
 	}
 }
