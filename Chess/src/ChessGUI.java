@@ -20,13 +20,16 @@ public class ChessGUI {
 
 	static Color BROWN = new Color(142, 59, 0);
 	static Color DARK_RED = new Color(142, 0, 0);
-	static Color DARK_YELLOW = new Color(225, 225, 0);
+	static Color DARK_YELLOW = new Color(200, 200, 0);
+	static Color LIGHT_BLACK = new Color(95, 95, 95);
+	static Color DARK_WHITE = new Color(220, 220, 220);
 	
 	//Create chess board grid
 	static BoardSquare [][] boardSquares = new BoardSquare[8][8];
 	static ArrayList<Object>[][] pieceArray;
 	static Border pieceWhenSelectedBorder = BorderFactory.createDashedBorder(Color.DARK_GRAY, 2, 2, 1, true);
-	static Border movementHighlightedBorder = BorderFactory.createDashedBorder(DARK_YELLOW, 3, 3, 1, true);
+	static Border boardSquareWhenSelectedBorder = BorderFactory.createDashedBorder(Color.DARK_GRAY, 2, 2, 1, true);
+	static Border movementHighlightedBorder = BorderFactory.createDashedBorder(Color.RED, 3, 3, 1, true);
 	static Border movementHighlightedSelectedBorder = BorderFactory.createLineBorder(Color.RED, 8);	
 	
 	public ChessGUI() {
@@ -68,8 +71,10 @@ public class ChessGUI {
         		
         		//Colour the board squares
         		if ((i%2 == 0 && j%2 == 1) || (i%2 == 1 && j%2 == 0)) {
-            		boardSquares[i][j].setBackground(Color.GRAY);    			
-        		}        		
+            		boardSquares[i][j].setBackground(LIGHT_BLACK);    			
+        		} else {
+        			boardSquares[i][j].setBackground(DARK_WHITE); 
+        		}
         	}
         }
 

@@ -21,7 +21,7 @@ public class MouseHandler implements MouseListener {
 			GameController.previousBoardSquareSelected = GameController.boardSquareSelected;
 			GameController.previousPieceSelected = GameController.pieceSelected;
 			if (GameController.previousBoardSquareSelected != null) {
-			GameController.previousPieceSelected.setHighlights(false);
+			GameController.previousPieceSelected.setMovementPaths(false);
 			((JLabel) GameController.previousBoardSquareSelected.getComponent(0)).setBorder(null);
 			GameController.previousPieceSelected.setIsSelected(false);
 			}
@@ -30,7 +30,7 @@ public class MouseHandler implements MouseListener {
 			GameController.boardSquareSelected = boardSquareSelected;
 			GameController.pieceSelected = (Pieces) boardSquareSelected.getClientProperty("Piece");			
 			pieceSelected.setIsSelected(true);
-			pieceSelected.setHighlights(true);
+			pieceSelected.setMovementPaths(true);
 		}
 		
 	}
@@ -45,10 +45,9 @@ public class MouseHandler implements MouseListener {
 		if(pieceSelected != null) {
 			((JLabel) boardSquareSelected.getComponent(0)).setBorder(ChessGUI.pieceWhenSelectedBorder);
 		}
-		
-		if(boardSquareSelected.getBorder() != null) {
-			
-		}
+			if (boardSquareSelected.getBorder() == ChessGUI.movementHighlightedBorder) {
+				boardSquareSelected.setBorder(ChessGUI.boardSquareWhenSelectedBorder);
+			}
 	}
 
 	@Override
@@ -62,6 +61,9 @@ public class MouseHandler implements MouseListener {
 			((JLabel) boardSquareSelected.getComponent(0)).setBorder(null);
 		}
 		
+		if (boardSquareSelected.getBorder() == ChessGUI.boardSquareWhenSelectedBorder) {
+			boardSquareSelected.setBorder(ChessGUI.movementHighlightedBorder);
+		}
 	}
 
 	@Override

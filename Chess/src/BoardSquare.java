@@ -5,6 +5,7 @@ public class BoardSquare extends JPanel{
 
 	public int locationX;
 	public int locationY;
+	public boolean isHighlighted = false;
 	
 	public BoardSquare(int locationX, int locationY) {
 		
@@ -18,5 +19,9 @@ public class BoardSquare extends JPanel{
 	
 	public int getLocationY() {
 		return this.locationY;
+	}
+	
+	public void drawHighlightHoverBorder() {
+		setBorder(ChessGUI.boardSquareWhenSelectedBorder);
 	}
 }

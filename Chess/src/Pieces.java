@@ -130,7 +130,7 @@ public class Pieces {
 		this.boardSquareLocatedOn = boardSquareLocatedOn;
 	}
 	
-	public void setHighlights(boolean areVisible) {
+	public void setMovementPaths(boolean areVisible) {
 		
 		//set highlights on or off
 		Border HighlightBorder;
@@ -183,10 +183,10 @@ public class Pieces {
 		}
 		
 		if (isSelected && pieceType == "Rook") {
-			//
+			//All vertical and horizontal directions
 			try {
 				for (int i=1; i<7; i++) {
-					if (ChessGUI.boardSquares[x][y-i].getClientProperty("Piece") == null) {
+					if (chessPieceAt(x, y-i) == null) {
 						highlightPainter(x, y-i, HighlightBorder);
 					} else { break; }
 				}
@@ -194,7 +194,7 @@ public class Pieces {
 			
 			try {
 				for (int i=1; i<7; i++) {
-					if (ChessGUI.boardSquares[x][y+i].getClientProperty("Piece") == null) {
+					if (chessPieceAt(x, y+i) == null) {
 						highlightPainter(x, y+i, HighlightBorder);
 					} else { break; }
 				}
@@ -202,7 +202,7 @@ public class Pieces {
 			
 			try {
 				for (int i=1; i<7; i++) {
-					if (ChessGUI.boardSquares[x+i][y].getClientProperty("Piece") == null) {
+					if (chessPieceAt(x+i, y) == null) {
 						highlightPainter(x+i, y, HighlightBorder);
 					} else { break; }
 				}
@@ -210,7 +210,7 @@ public class Pieces {
 			
 			try {
 				for (int i=1; i<7; i++) {
-					if (ChessGUI.boardSquares[x-i][y].getClientProperty("Piece") == null) {
+					if (chessPieceAt(x-i, y) == null) {
 						highlightPainter(x-i, y, HighlightBorder);
 					} else { break; }
 				}
@@ -218,10 +218,10 @@ public class Pieces {
 		}
 				
 		if (isSelected && pieceType == "Bishop") {
-			//
+			//All diagonal directions
 			try {
 				for (int i=1; i<7; i++) {
-					if (ChessGUI.boardSquares[x-i][y-i].getClientProperty("Piece") == null) {
+					if (chessPieceAt(x-i, y-i) == null) {
 						highlightPainter(x-i, y-i, HighlightBorder);
 					} else { break; }
 				}
@@ -229,7 +229,7 @@ public class Pieces {
 			
 			try {
 				for (int i=1; i<7; i++) {
-					if (ChessGUI.boardSquares[x+i][y+i].getClientProperty("Piece") == null) {
+					if (chessPieceAt(x+i, y+i) == null) {
 						highlightPainter(x+i, y+i, HighlightBorder);
 					} else { break; }
 				}
@@ -237,7 +237,7 @@ public class Pieces {
 			
 			try {
 				for (int i=1; i<7; i++) {
-					if (ChessGUI.boardSquares[x+i][y-i].getClientProperty("Piece") == null) {
+					if (chessPieceAt(x+i, y-i) == null) {
 						highlightPainter(x+i, y-i, HighlightBorder);
 					} else { break; }
 				}
@@ -245,7 +245,7 @@ public class Pieces {
 			
 			try {
 				for (int i=1; i<7; i++) {
-					if (ChessGUI.boardSquares[x-i][y+i].getClientProperty("Piece") == null) {
+					if (chessPieceAt(x-i, y+i) == null) {
 						highlightPainter(x-i, y+i, HighlightBorder);
 					} else { break; }
 				}
@@ -253,10 +253,10 @@ public class Pieces {
 		}
 		
 		if (isSelected && pieceType == "Queen") {
-			//
+			//All diagonal directions
 			try {
 				for (int i=1; i<7; i++) {
-					if (ChessGUI.boardSquares[x-i][y-i].getClientProperty("Piece") == null) {
+					if (chessPieceAt(x-i, y-i) == null) {
 						highlightPainter(x-i, y-i, HighlightBorder);
 					} else { break; }
 				}
@@ -264,7 +264,7 @@ public class Pieces {
 			
 			try {
 				for (int i=1; i<7; i++) {
-					if (ChessGUI.boardSquares[x+i][y+i].getClientProperty("Piece") == null) {
+					if (chessPieceAt(x+i, y+i) == null) {
 						highlightPainter(x+i, y+i, HighlightBorder);
 					} else { break; }
 				}
@@ -272,7 +272,7 @@ public class Pieces {
 			
 			try {
 				for (int i=1; i<7; i++) {
-					if (ChessGUI.boardSquares[x+i][y-i].getClientProperty("Piece") == null) {
+					if (chessPieceAt(x+i, y-i) == null) {
 						highlightPainter(x+i, y-i, HighlightBorder);
 					} else { break; }
 				}
@@ -280,8 +280,41 @@ public class Pieces {
 			
 			try {
 				for (int i=1; i<7; i++) {
-					if (ChessGUI.boardSquares[x-i][y+i].getClientProperty("Piece") == null) {
+					if (chessPieceAt(x-i, y+i) == null) {
 						highlightPainter(x-i, y+i, HighlightBorder);
+					} else { break; }
+				}
+			} catch (ArrayIndexOutOfBoundsException e) {}
+			//All vertical and horizontal directions
+			try {
+				for (int i=1; i<7; i++) {
+					if (chessPieceAt(x, y-i) == null) {
+						highlightPainter(x, y-i, HighlightBorder);
+					} else { break; }
+				}
+				
+			} catch (ArrayIndexOutOfBoundsException e) {}
+			
+			try {
+				for (int i=1; i<7; i++) {
+					if (chessPieceAt(x, y+i) == null) {
+						highlightPainter(x, y+i, HighlightBorder);
+					} else { break; }
+				}
+			} catch (ArrayIndexOutOfBoundsException e) {}
+			
+			try {
+				for (int i=1; i<7; i++) {
+					if (chessPieceAt(x+i, y) == null) {
+						highlightPainter(x+i, y, HighlightBorder);
+					} else { break; }
+				}
+			} catch (ArrayIndexOutOfBoundsException e) {}
+			
+			try {
+				for (int i=1; i<7; i++) {
+					if (chessPieceAt(x-i, y) == null) {
+						highlightPainter(x-i, y, HighlightBorder);
 					} else { break; }
 				}
 			} catch (ArrayIndexOutOfBoundsException e) {}
@@ -290,10 +323,10 @@ public class Pieces {
 	
 	public void highlightPainter(int x, int y, Border HighlightBorder) {		
 		try { ChessGUI.boardSquares[x][y].setBorder(HighlightBorder); 
-		} catch (ArrayIndexOutOfBoundsException e) {}		
+		} catch (ArrayIndexOutOfBoundsException e) {}
 	}
 	
-	public void hasPieceAt(int x, int y) {
-		
+	public Object chessPieceAt(int x, int y) {
+		return ChessGUI.boardSquares[x][y].getClientProperty("Piece");
 	}
 }
